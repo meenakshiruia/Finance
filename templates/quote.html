@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <h2> Get a Stock Quote</h2>
+    <form action="/quote" method="post">
+        <label for="symbol">Symbol</label>
+        <input type="text" name="symbol" id="symbol" placeholder="Symbol">
+        <button type="submit">Get Quote</button>
+    </form>
+    {% if quote %}
+        <h3>{{ quote['name'] }} ({{ quote['symbol'] }})</h3>
+        <p>Price: {{ quote['price']|usd }}</p>
+        <button id="sell" class="btn btn-primary" >Buy</button>
+
+        <script type="text/javascript">
+            document.getElementById("sell").onclick = function () {
+                location.href = "/buy";
+            };
+        </script>
+    {% endif %}
+
+{% endblock %}
